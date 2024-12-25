@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
@@ -13,19 +13,26 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password, displayName, photoURL) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      (result) => {
-        const newUser = result.user;
+  const createUser = async (email, password, displayName, photoURL) => {
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const newUser = result.user;
 
-        // Update profile with displayName and photoURL
-        return updateProfile(newUser, {
-          displayName: displayName,
-          photoURL: photoURL,
-        }).then(() => newUser); // Return the user after updating profile
-      }
-    );
+      // Update the user's profile with displayName and photoURL
+      await updateProfile(newUser, {
+        displayName: displayName,
+        photoURL: photoURL,
+      });
+
+      console.log("User created and profile updated:", newUser);
+      return newUser;
+    } catch (error) {
+      console.error("Error creating user or updating profile:", error.message);
+    }
   };
 
   const signInUser = (email, password) => {

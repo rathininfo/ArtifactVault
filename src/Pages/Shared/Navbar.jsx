@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 text-white shadow-lg top-0 left-0 z-50">
+    <nav className="bg-blue-600 text-white shadow-lg fixed w-full top-0 left-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 py-3 flex justify-between items-center">
         {/* Website Name/Logo */}
         <Link to="/" className="text-2xl font-bold">
@@ -66,7 +66,7 @@ const Navbar = () => {
 
               {/* Display User Name on Hover */}
               <div
-                className={`absolute top-12 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded shadow-md text-sm ${
+                className={`absolute top-12 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded shadow-md text-sm z-40 ${
                   isDropdownOpen ? "block" : "hidden"
                 }`}
               >

@@ -20,6 +20,8 @@ const Login = ({ onSocialLogin }) => {
       .catch((error) => {
         console.log(error.message);
       });
+
+    navigate("/");
   };
 
   const handleGoogleLogin = async () => {
