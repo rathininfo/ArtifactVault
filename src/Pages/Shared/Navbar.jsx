@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
@@ -12,13 +12,20 @@ const Navbar = () => {
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   const handleLogin = () => navigate("/login");
+
   const handleLogout = () => {
-    logout();
-    navigate("/");
+    signOutUser()
+      .then(() => {
+        console.log("User successfully logged out");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error.message);
+      });
   };
 
   return (
-    <nav className="bg-blue-600 text-white shadow-lg fixed w-full top-0 left-0 z-50">
+    <nav className="bg-blue-600 text-white shadow-lg top-0 left-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 py-3 flex justify-between items-center">
         {/* Website Name/Logo */}
         <Link to="/" className="text-2xl font-bold">
@@ -49,7 +56,6 @@ const Navbar = () => {
               <button
                 className="flex items-center focus:outline-none"
                 onClick={toggleDropdown}
-                onBlur={() => setIsDropdownOpen(false)}
               >
                 <img
                   src={user.photoURL || "https://via.placeholder.com/40"}
@@ -58,12 +64,11 @@ const Navbar = () => {
                 />
               </button>
 
-              {/* Hover to show displayName */}
+              {/* Display User Name on Hover */}
               <div
                 className={`absolute top-12 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded shadow-md text-sm ${
                   isDropdownOpen ? "block" : "hidden"
                 }`}
-                style={{ zIndex: 100 }} // Make sure the hover name is above other content
               >
                 {user.displayName || "User"}
               </div>
@@ -73,6 +78,7 @@ const Navbar = () => {
                 className={`absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48 ${
                   isDropdownOpen ? "block" : "hidden"
                 }`}
+                onClick={(e) => e.stopPropagation()} // Prevent click events from closing the dropdown
               >
                 <Link
                   to="/my-artifacts"
@@ -123,7 +129,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-blue-600 text-white shadow-md">
-          <div className="flex flex-col items-center gap-4 py-4 my-2 ">
+          <div className="flex flex-col items-center gap-4 py-4 my-2">
             <Link to="/" className="hover:underline">
               Home
             </Link>
