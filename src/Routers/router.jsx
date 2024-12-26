@@ -6,6 +6,7 @@ import Login from "../Pages/Login";
 import PrivateRouter from "./PrivateRouter";
 import AddArtifact from "../Pages/AddArtifact";
 import AllArtifacts from "../Pages/AllArtifacts/AllArtifacts";
+import ArtifactDetails from "../Pages/Home/ArtifactDetails";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,13 @@ const router = createBrowserRouter([
             <AddArtifact></AddArtifact>
           </PrivateRouter>
         ),
+      },
+
+      {
+        path: "/artifactDetails/:id",
+        element: <ArtifactDetails></ArtifactDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/artifacts_collection/${params.id}`),
       },
     ],
   },

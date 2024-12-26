@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 text-white shadow-lg fixed w-full top-0 left-0 z-50">
+    <nav className="bg-blue-600 text-white shadow-lg sticky top-0 left-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 py-3 flex justify-between items-center">
         {/* Website Name/Logo */}
         <Link to="/" className="text-2xl font-bold">
@@ -37,7 +37,7 @@ const Navbar = () => {
           <Link to="/" className="hover:underline">
             Home
           </Link>
-          <Link to="/artifacts" className="hover:underline">
+          <Link to="/all-artifacts" className="hover:underline">
             All Artifacts
           </Link>
           <Link to="/add-artifact" className="hover:underline">
@@ -75,7 +75,7 @@ const Navbar = () => {
 
               {/* Dropdown Menu */}
               <div
-                className={`absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48 ${
+                className={`absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48 z-30 ${
                   isDropdownOpen ? "block" : "hidden"
                 }`}
                 onClick={(e) => e.stopPropagation()} // Prevent click events from closing the dropdown
