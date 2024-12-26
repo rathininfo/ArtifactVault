@@ -7,6 +7,7 @@ import PrivateRouter from "./PrivateRouter";
 import AddArtifact from "../Pages/AddArtifact";
 import AllArtifacts from "../Pages/AllArtifacts/AllArtifacts";
 import ArtifactDetails from "../Pages/Home/ArtifactDetails";
+import MyArtifacts from "../Pages/MyArtifacts";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login></Login>,
       },
+
+      {
+        path: "/my-artifacts",
+        element: <MyArtifacts></MyArtifacts>,
+      },
       {
         path: "all-artifacts",
         element: (
@@ -34,6 +40,7 @@ const router = createBrowserRouter([
             <AllArtifacts></AllArtifacts>
           </PrivateRouter>
         ),
+        loader: () => fetch(`http://localhost:5000/artifacts_collection`),
       },
 
       {
