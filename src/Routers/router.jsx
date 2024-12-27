@@ -8,6 +8,7 @@ import AddArtifact from "../Pages/AddArtifact";
 import AllArtifacts from "../Pages/AllArtifacts/AllArtifacts";
 import ArtifactDetails from "../Pages/Home/ArtifactDetails";
 import MyArtifacts from "../Pages/MyArtifacts";
+import UpdateArtifact from "../Pages/UpdateArtifact";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,13 @@ const router = createBrowserRouter([
         element: <ArtifactDetails></ArtifactDetails>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/artifacts_collection/${params.id}`),
+      },
+
+      {
+        path: "/update-artifact/:id",
+        element: <UpdateArtifact></UpdateArtifact>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/user-addded-artifacts/${params.id}`),
       },
     ],
   },
