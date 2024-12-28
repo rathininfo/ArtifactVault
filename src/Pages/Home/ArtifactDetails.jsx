@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { LikedArtifactsContext } from "../../context/LikedArtifactsContext";
 
 const ArtifactDetails = () => {
   const artifact = useLoaderData();
+  const { addLikedArtifact } = useContext(LikedArtifactsContext); // Access the liked artifacts context
 
   const [count, setCount] = useState(artifact.likeCount);
 
@@ -18,9 +20,9 @@ const ArtifactDetails = () => {
         }
       );
       const updatedArtifact = await response.json();
-      console.log(updatedArtifact);
       if (updatedArtifact) {
         setCount(updatedArtifact.likeCount); // Update state with the new like count
+        addLikedArtifact(artifact); // Add the artifact to the liked artifacts context
 
         // Show success alert
         Swal.fire({

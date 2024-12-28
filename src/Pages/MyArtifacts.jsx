@@ -14,54 +14,63 @@ const MyArtifacts = () => {
       fetch(
         `http://localhost:5000/added_artifacts_collection?email=${user.email}`
       )
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to fetch artifacts: ${res.status}`);
+          }
+          return res.json();
+        })
         .then((data) => {
-          setArtifacts(data);
+          // Ensure data is an array before setting state
+          if (Array.isArray(data)) {
+            setArtifacts(data);
+          } else {
+            setArtifacts([]); // If data is not an array, set it to empty
+          }
           setLoading(false); // Set loading to false after data is fetched
         })
         .catch((error) => {
           console.error("Error fetching artifacts:", error);
+          setArtifacts([]); // Ensure artifacts is always an array
           setLoading(false);
         });
     }
   }, [user]);
 
   // Handle Delete Artifact
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/user-addded-artifacts/${id}`, {
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/user-added-artifacts/${id}`,
+        {
           method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              setArtifacts(artifacts.filter((artifact) => artifact._id !== id)); // Remove deleted artifact from state
-              Swal.fire(
-                "Deleted!",
-                "Your artifact has been deleted.",
-                "success"
-              );
-            }
-          })
-          .catch((error) => {
-            console.error("Error deleting artifact:", error);
-            Swal.fire(
-              "Error!",
-              "Could not delete the artifact. Try again later.",
-              "error"
-            );
-          });
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to delete artifact. Status: ${response.status}`
+        );
       }
-    });
+
+      const data = await response.json();
+      console.log("Artifact deleted successfully:", data);
+
+      // Remove the deleted artifact from the state
+      setArtifacts((prevArtifacts) =>
+        prevArtifacts.filter((artifact) => artifact._id !== id)
+      );
+
+      // Optionally show a success message
+      Swal.fire("Deleted!", "Your artifact has been deleted.", "success");
+    } catch (err) {
+      console.error("Error deleting artifact:", err);
+      Swal.fire(
+        "Error!",
+        "There was a problem deleting your artifact.",
+        "error"
+      );
+    }
   };
 
   // If loading, show a spinner
@@ -74,12 +83,17 @@ const MyArtifacts = () => {
     return (
       <div className="text-center mt-10">
         <h2 className="text-2xl font-semibold text-gray-700">
-          No Artifacts Found
+          You haven't added any artifacts yet.
         </h2>
         <p className="text-gray-500">
-          You haven't added any artifacts yet. Start adding some to see them
-          here!
+          Start adding some artifacts to see them here!
         </p>
+        <Link
+          to="/add-artifact" // Link to the page where the user can add an artifact
+          className="mt-4 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600"
+        >
+          Add Artifact
+        </Link>
       </div>
     );
   }

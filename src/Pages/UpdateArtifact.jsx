@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateArtifact = () => {
   const { id } = useParams(); // Get the artifact ID from the URL
-  const navigate = useNavigate(); // Navigate to other pages
   const [artifact, setArtifact] = useState(null); // Store artifact data
   const [loading, setLoading] = useState(true); // Show loading state
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+  });
 
   // Fetch artifact data by ID
   useEffect(() => {
@@ -33,80 +36,108 @@ const UpdateArtifact = () => {
   }, [id]);
 
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const updateData = {
+      name: artifact.name,
+      image: artifact.image,
+      context: artifact.context,
+      createdAt: artifact.createdAt,
+      discoveredAt: artifact.discoveredAt,
+      discoveredBy: artifact.discoveredBy,
+      location: artifact.location,
+    };
 
     try {
-      const res = await fetch(`http://localhost:5000/added-artifacts/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(artifact),
-      });
+      const response = await fetch(
+        `http://localhost:5000/user-added-artifacts/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateData),
+        }
+      );
 
-      if (res.ok) {
-        Swal.fire("Success", "Artifact updated successfully!", "success");
-        navigate(`/artifacts/${id}`);
-      } else {
-        const errorData = await res.json();
-        Swal.fire(
-          "Error",
-          errorData.error || "Failed to update artifact.",
-          "error"
+      if (!response.ok) {
+        throw new Error(
+          `Failed to update artifact. Status: ${response.status}`
         );
       }
-    } catch (error) {
-      console.error("Error updating artifact:", error);
-      Swal.fire(
-        "Error",
-        "An error occurred while updating the artifact.",
-        "error"
-      );
+
+      const data = await response.json(); // The response will contain the updated artifact
+
+      console.log("Artifact updated successfully:", data);
+
+      // Manually update the state with the updated data
+      setArtifact({
+        ...data, // Update the state with the full updated artifact
+      });
+
+      Swal.fire("Success", "Artifact updated successfully!", "success");
+    } catch (err) {
+      console.error("Error updating artifact:", err);
+      Swal.fire("Error", "Failed to update artifact.", "error");
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setArtifact({ ...artifact, [name]: value });
+    setArtifact((prev) => ({ ...prev, [name]: value }));
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-lg font-semibold">Loading...</p>
+      </div>
+    );
   }
 
   if (!artifact) {
-    return <p>Artifact not found.</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-lg font-semibold">Artifact not found.</p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Update Artifact</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Artifact Name:</label>
+    <div className="max-w-4xl mx-auto p-8 bg-gray-100 rounded-lg shadow-md mt-8">
+      <h1 className="text-2xl font-bold text-center mb-6">Update Artifact</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">Artifact Name:</label>
           <input
             type="text"
             name="name"
             value={artifact.name || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           />
         </div>
-        <div>
-          <label>Artifact Image (URL):</label>
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">
+            Artifact Image (URL):
+          </label>
           <input
             type="text"
             name="image"
             value={artifact.image || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           />
         </div>
-        <div>
-          <label>Artifact Type:</label>
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">Artifact Type:</label>
           <select
             name="type"
             value={artifact.type || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           >
             <option value="Tools">Tools</option>
@@ -115,56 +146,68 @@ const UpdateArtifact = () => {
             <option value="Writings">Writings</option>
           </select>
         </div>
-        <div>
-          <label>Historical Context:</label>
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">
+            Historical Context:
+          </label>
           <textarea
             name="context"
             value={artifact.context || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           />
         </div>
-        <div>
-          <label>Created At:</label>
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">Created At:</label>
           <input
             type="text"
             name="createdAt"
             value={artifact.createdAt || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           />
         </div>
-        <div>
-          <label>Discovered At:</label>
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">Discovered At:</label>
           <input
             type="text"
             name="discoveredAt"
             value={artifact.discoveredAt || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           />
         </div>
-        <div>
-          <label>Discovered By:</label>
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">Discovered By:</label>
           <input
             type="text"
             name="discoveredBy"
             value={artifact.discoveredBy || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           />
         </div>
-        <div>
-          <label>Present Location:</label>
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">Present Location:</label>
           <input
             type="text"
             name="location"
             value={artifact.location || ""}
             onChange={handleChange}
+            className="p-2 border rounded-md"
             required
           />
         </div>
-        <button type="submit">Update Artifact</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600"
+        >
+          Update Artifact
+        </button>
       </form>
     </div>
   );

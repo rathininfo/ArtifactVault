@@ -5,11 +5,14 @@ import App from "./App.jsx";
 import router from "./Routers/router.jsx";
 import { RouterProvider } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider.jsx";
+import LikedArtifactsProvider from "./context/LikedArtifactsContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <LikedArtifactsProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </LikedArtifactsProvider>
   </StrictMode>
 );

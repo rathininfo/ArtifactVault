@@ -9,6 +9,7 @@ import AllArtifacts from "../Pages/AllArtifacts/AllArtifacts";
 import ArtifactDetails from "../Pages/Home/ArtifactDetails";
 import MyArtifacts from "../Pages/MyArtifacts";
 import UpdateArtifact from "../Pages/UpdateArtifact";
+import LikedArtifactsPage from "../Pages/Home/LikedArtifactsPage";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
         element: <UpdateArtifact></UpdateArtifact>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/user-addded-artifacts/${params.id}`),
+      },
+
+      {
+        path: "/liked-artifacts",
+        element: <LikedArtifactsPage></LikedArtifactsPage>,
       },
     ],
   },
