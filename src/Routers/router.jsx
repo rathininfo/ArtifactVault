@@ -33,15 +33,15 @@ const router = createBrowserRouter([
 
       {
         path: "/my-artifacts",
-        element: <MyArtifacts></MyArtifacts>,
+        element: (
+          <PrivateRouter>
+            <MyArtifacts></MyArtifacts>
+          </PrivateRouter>
+        ),
       },
       {
         path: "all-artifacts",
-        element: (
-          <PrivateRouter>
-            <AllArtifacts></AllArtifacts>
-          </PrivateRouter>
-        ),
+        element: <AllArtifacts></AllArtifacts>,
         loader: () => fetch(`http://localhost:5000/artifacts_collection`),
       },
 
@@ -56,21 +56,33 @@ const router = createBrowserRouter([
 
       {
         path: "/artifactDetails/:id",
-        element: <ArtifactDetails></ArtifactDetails>,
+        element: (
+          <PrivateRouter>
+            <ArtifactDetails></ArtifactDetails>
+          </PrivateRouter>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/artifacts_collection/${params.id}`),
       },
 
       {
         path: "/update-artifact/:id",
-        element: <UpdateArtifact></UpdateArtifact>,
+        element: (
+          <PrivateRouter>
+            <UpdateArtifact></UpdateArtifact>
+          </PrivateRouter>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/user-addded-artifacts/${params.id}`),
       },
 
       {
         path: "/liked-artifacts",
-        element: <LikedArtifactsPage></LikedArtifactsPage>,
+        element: (
+          <PrivateRouter>
+            <LikedArtifactsPage></LikedArtifactsPage>
+          </PrivateRouter>
+        ),
       },
     ],
   },
