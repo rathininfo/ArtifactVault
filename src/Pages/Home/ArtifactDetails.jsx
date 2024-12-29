@@ -5,6 +5,7 @@ import { LikedArtifactsContext } from "../../context/LikedArtifactsContext";
 
 const ArtifactDetails = () => {
   const artifact = useLoaderData();
+  console.log(artifact);
   const { addLikedArtifact } = useContext(LikedArtifactsContext); // Access the liked artifacts context
 
   const [count, setCount] = useState(artifact.likeCount);

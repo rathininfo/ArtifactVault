@@ -1,8 +1,12 @@
 import { useContext } from "react";
 import { LikedArtifactsContext } from "../../context/LikedArtifactsContext";
+import AuthContext from "../../context/AuthContext";
 
 const LikedArtifactsPage = () => {
   const { likedArtifacts } = useContext(LikedArtifactsContext); // Access liked artifacts from the context.
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
   return (
     <div className="p-6">
