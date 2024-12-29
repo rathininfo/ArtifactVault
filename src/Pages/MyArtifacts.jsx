@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const MyArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]); // To store artifacts
@@ -11,8 +12,12 @@ const MyArtifacts = () => {
   // Fetch artifacts added by the logged-in user
   useEffect(() => {
     if (user && user.email) {
+      setLoading(true); // Set loading to true before starting fetch
       fetch(
-        `http://localhost:5000/added_artifacts_collection?email=${user.email}`
+        `http://localhost:5000/added_artifacts_collection?email=${user.email}`,
+        {
+          credentials: "include",
+        }
       )
         .then((res) => {
           if (!res.ok) {
@@ -21,21 +26,19 @@ const MyArtifacts = () => {
           return res.json();
         })
         .then((data) => {
-          // Ensure data is an array before setting state
-          if (Array.isArray(data)) {
-            setArtifacts(data);
-          } else {
-            setArtifacts([]); // If data is not an array, set it to empty
-          }
-          setLoading(false); // Set loading to false after data is fetched
+          setArtifacts(Array.isArray(data) ? data : []); // Ensure artifacts is always an array
+          setLoading(false); // Data fetched, set loading to false
         })
         .catch((error) => {
           console.error("Error fetching artifacts:", error);
-          setArtifacts([]); // Ensure artifacts is always an array
-          setLoading(false);
+          setArtifacts([]); // Reset artifacts to an empty array on error
+          setLoading(false); // Fetch failed, set loading to false
         });
+    } else {
+      setArtifacts([]); // Reset artifacts if no user is logged in
+      setLoading(false); // No fetch needed, set loading to false
     }
-  }, [user]);
+  }, [user.email]);
 
   // Handle Delete Artifact
   const handleDelete = async (id) => {
