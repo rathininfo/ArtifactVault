@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -105,6 +106,9 @@ const UpdateArtifact = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-gray-100 rounded-lg shadow-md mt-8">
+      <Helmet>
+        <title>Update Artifacts</title>
+      </Helmet>
       <h1 className="text-2xl font-bold text-center mb-6">Update Artifact</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col">
@@ -204,7 +208,7 @@ const UpdateArtifact = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600"
+          className="w-full bg-green-500 text-white font-semibold py-2 rounded-md hover:bg-green-600"
         >
           Update Artifact
         </button>

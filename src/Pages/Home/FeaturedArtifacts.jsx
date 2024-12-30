@@ -31,7 +31,7 @@ const FeaturedArtifacts = () => {
   }, []);
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8">
+    <div className="py-12 px-12 sm:px-6 lg:px-8 bg-gray-50">
       <h1 className="text-3xl font-bold text-center mb-8">
         Featured Artifacts
       </h1>
@@ -42,7 +42,7 @@ const FeaturedArtifacts = () => {
       </div>
       <div className="mt-8 text-center">
         <Link to="/all-artifacts">
-          <button className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+          <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
             See All
           </button>
         </Link>

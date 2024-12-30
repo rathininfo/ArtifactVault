@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { LikedArtifactsContext } from "../../context/LikedArtifactsContext";
 import AuthContext from "../../context/AuthContext";
+import { Helmet } from "react-helmet-async";
 
 const LikedArtifactsPage = () => {
   const { likedArtifacts } = useContext(LikedArtifactsContext); // Access liked artifacts from the context.
@@ -10,6 +11,9 @@ const LikedArtifactsPage = () => {
 
   return (
     <div className="p-6">
+      <Helmet>
+        <title>Liked Artifacts</title>
+      </Helmet>
       <h1 className="text-2xl font-bold mb-6">Liked Artifacts</h1>
       {likedArtifacts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

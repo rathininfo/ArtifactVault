@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 text-white shadow-lg sticky top-0 left-0 z-50">
+    <nav className="bg-green-600 text-white shadow-lg sticky top-0 left-0 z-50">
       <div className="container mx-auto px-4 lg:px-8 py-3 flex justify-between items-center">
         {/* Website Name/Logo */}
         <Link to="/" className="text-2xl font-bold">
@@ -34,19 +34,25 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-6">
-          <Link to="/" className="hover:underline">
+          <Link to="/" className="hover:bg-green-700 px-4 py-2 rounded-md">
             Home
           </Link>
-          <Link to="/all-artifacts" className="hover:underline">
+          <Link
+            to="/all-artifacts"
+            className="hover:bg-green-700 px-4 py-2 rounded-md"
+          >
             All Artifacts
           </Link>
-          <Link to="/add-artifact" className="hover:underline">
+          <Link
+            to="/add-artifact"
+            className="hover:bg-green-700 px-4 py-2 rounded-md"
+          >
             Add Artifact
           </Link>
           {!user ? (
             <button
               onClick={handleLogin}
-              className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-100 transition"
+              className="bg-white text-green-600 px-4 py-2 rounded hover:bg-gray-100 transition"
             >
               Login
             </button>
@@ -66,7 +72,7 @@ const Navbar = () => {
 
               {/* Display User Name on Hover */}
               <div
-                className={`absolute top-12 left-1/2 transform -translate-x-1/2 bg-white text-black px-2 py-1 rounded shadow-md text-sm z-40 ${
+                className={`absolute top-12 left-1/2 transform -translate-x-1/2  text-white-600 bg-green-500 px-2 py-1 rounded shadow-md text-sm z-40  ${
                   isDropdownOpen ? "block" : "hidden"
                 }`}
               >
@@ -75,7 +81,7 @@ const Navbar = () => {
 
               {/* Dropdown Menu */}
               <div
-                className={`absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48 z-30 ${
+                className={`absolute right-0 mt-3 mr-10 bg-white text-black rounded shadow-lg w-48 z-30 ${
                   isDropdownOpen ? "block" : "hidden"
                 }`}
                 onClick={(e) => e.stopPropagation()} // Prevent click events from closing the dropdown
@@ -128,7 +134,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-blue-600 text-white shadow-md">
+        <div className="lg:hidden bg-green-600 text-white shadow-md">
           <div className="flex flex-col items-center gap-4 py-4 my-2">
             <Link to="/" className="hover:underline">
               Home
@@ -142,7 +148,7 @@ const Navbar = () => {
             {!user ? (
               <button
                 onClick={handleLogin}
-                className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-100 transition"
+                className="bg-white text-green-600 px-4 py-2 rounded hover:bg-gray-100 transition"
               >
                 Login
               </button>

@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "all-artifacts",
+        path: "/all-artifacts",
         element: <AllArtifacts></AllArtifacts>,
         loader: () => fetch(`http://localhost:5000/artifacts_collection`),
       },

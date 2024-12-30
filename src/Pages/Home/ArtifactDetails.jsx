@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { LikedArtifactsContext } from "../../context/LikedArtifactsContext";
+import { Helmet } from "react-helmet-async";
 
 const ArtifactDetails = () => {
   const artifact = useLoaderData();
@@ -50,6 +51,9 @@ const ArtifactDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+      <Helmet>
+        <title>Artifact Details</title>
+      </Helmet>
       <img
         src={artifact.artifactImage}
         alt={artifact.artifactName}
@@ -63,7 +67,7 @@ const ArtifactDetails = () => {
           <span className="text-lg font-semibold">{count} Likes</span>
           <button
             onClick={handleLike}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
           >
             Like
           </button>

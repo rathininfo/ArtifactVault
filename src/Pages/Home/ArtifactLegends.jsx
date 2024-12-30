@@ -45,7 +45,7 @@ const ArtifactLegends = () => {
               <p className="text-gray-700 mt-2">{legend.legend}</p>
               <a
                 href={`/legends/${legend.id}`}
-                className="text-blue-600 mt-4 inline-block hover:underline"
+                className="text-green-600 mt-4 inline-block hover:underline"
               >
                 Discover the Legend
               </a>

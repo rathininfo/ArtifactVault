@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -48,6 +48,17 @@ const Register = () => {
       return "Password must be at least 6 characters long.";
     }
     return null;
+  };
+
+  // Google SignIn Handler
+  const handleGoogleLogin = async () => {
+    try {
+      await signWithGoogle(); // Sign in with Google
+      navigate("/"); // Redirect to home page or dashboard after successful Google login
+    } catch (error) {
+      setError(error.message || "Google login failed!");
+      alert(error.message || "Google login failed!");
+    }
   };
 
   return (
@@ -125,15 +136,24 @@ const Register = () => {
 
           <button
             type="submit"
-            className="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700"
+            className="bg-green-600 text-white w-full py-2 rounded hover:bg-green-700"
           >
             Register
           </button>
         </form>
 
+        <div className="mt-4">
+          <button
+            onClick={handleGoogleLogin}
+            className="bg-red-600 text-white w-full py-2 rounded hover:bg-red-700"
+          >
+            Register with Google
+          </button>
+        </div>
+
         <p className="text-center text-gray-600 mt-4">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-green-600 hover:underline">
             Login
           </Link>
         </p>

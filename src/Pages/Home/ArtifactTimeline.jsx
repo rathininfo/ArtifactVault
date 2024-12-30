@@ -38,7 +38,7 @@ const ArtifactTimeline = () => {
               key={artifact.id}
               className={`mb-10 ml-6 ${index % 2 === 0 ? "" : "self-end"}`}
             >
-              <div className="absolute w-6 h-6 bg-blue-600 rounded-full -left-3"></div>
+              <div className="absolute w-6 h-6 bg-green-600 rounded-full -left-3"></div>
               <div className="bg-white p-6 rounded-lg shadow-lg">
                 <img
                   src={artifact.image}
@@ -50,7 +50,7 @@ const ArtifactTimeline = () => {
                 <p className="text-gray-700 mt-2">{artifact.description}</p>
                 <a
                   href={`/artifact/${artifact.id}`}
-                  className="text-blue-600 mt-4 inline-block hover:underline"
+                  className="text-green-600 mt-4 inline-block hover:underline"
                 >
                   View More
                 </a>

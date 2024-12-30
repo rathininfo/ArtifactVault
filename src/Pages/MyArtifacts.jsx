@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const MyArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]); // To store artifacts
@@ -85,6 +86,9 @@ const MyArtifacts = () => {
   if (artifacts.length === 0) {
     return (
       <div className="text-center mt-10">
+        <Helmet>
+          <title>My Artifacts</title>
+        </Helmet>
         <h2 className="text-2xl font-semibold text-gray-700">
           You haven't added any artifacts yet.
         </h2>
@@ -93,7 +97,7 @@ const MyArtifacts = () => {
         </p>
         <Link
           to="/add-artifact" // Link to the page where the user can add an artifact
-          className="mt-4 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600"
+          className="mt-4 inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 mb-10"
         >
           Add Artifact
         </Link>

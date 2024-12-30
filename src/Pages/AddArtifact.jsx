@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const AddArtifact = () => {
   const { user } = useContext(AuthContext);
@@ -75,6 +76,9 @@ const AddArtifact = () => {
 
   return (
     <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-md">
+      <Helmet>
+        <title>ADD Artifacts</title>
+      </Helmet>
       <h1 className="text-2xl font-bold mb-6">Add Artifact</h1>
       <form onSubmit={handleSubmit}>
         {/* Artifact Name */}
@@ -88,7 +92,7 @@ const AddArtifact = () => {
             value={formData.artifactName}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
         </div>
 
@@ -103,7 +107,7 @@ const AddArtifact = () => {
             value={formData.artifactImage}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
         </div>
 
@@ -117,7 +121,7 @@ const AddArtifact = () => {
             value={formData.artifactType}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
           >
             <option value="Tools">Tools</option>
             <option value="Weapons">Weapons</option>
@@ -136,7 +140,7 @@ const AddArtifact = () => {
             value={formData.historicalContext}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
           ></textarea>
         </div>
 
@@ -151,7 +155,7 @@ const AddArtifact = () => {
             value={formData.createdAt}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
             placeholder="e.g., 100 BC"
           />
         </div>
@@ -167,7 +171,7 @@ const AddArtifact = () => {
             value={formData.discoveredAt}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
             placeholder="e.g., 1799"
           />
         </div>
@@ -183,7 +187,7 @@ const AddArtifact = () => {
             value={formData.discoveredBy}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
         </div>
 
@@ -198,7 +202,7 @@ const AddArtifact = () => {
             value={formData.presentLocation}
             onChange={handleChange}
             required
-            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-1 py-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
         </div>
 
@@ -229,7 +233,7 @@ const AddArtifact = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
         >
           Add Artifact
         </button>

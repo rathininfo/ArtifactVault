@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import { Helmet } from "react-helmet-async";
 
-const Login = ({ onSocialLogin }) => {
-  const { signInUser } = useContext(AuthContext);
+const Login = () => {
+  const { signInUser, signWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -13,22 +14,20 @@ const Login = ({ onSocialLogin }) => {
     const email = form.email.value;
     const password = form.password.value;
 
-    signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-
-    navigate("/");
+    try {
+      await signInUser(email, password); // Sign in with email and password
+      navigate("/"); // Redirect on successful login
+    } catch (error) {
+      setError(error.message);
+      console.error(error.message);
+    }
   };
 
   const handleGoogleLogin = async () => {
     try {
-      await onSocialLogin(); // Call your social login logic
+      await signWithGoogle(); // Sign in with Google
       alert("Google login successful!");
-      navigate("/");
+      navigate("/"); // Redirect on successful Google login
     } catch (err) {
       setError(err.message || "Google login failed!");
       alert(err.message || "Google login failed!");
@@ -77,7 +76,7 @@ const Login = ({ onSocialLogin }) => {
           </div>
           <button
             type="submit"
-            className="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700"
+            className="bg-green-600 text-white w-full py-2 rounded hover:bg-green-700"
           >
             Login
           </button>
