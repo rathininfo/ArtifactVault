@@ -79,7 +79,7 @@ const MyArtifacts = () => {
 
   // If loading, show a spinner
   if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return <span class="loading loading-spinner loading-lg"></span>;
   }
 
   // If no artifacts, show a meaningful message

@@ -91,7 +91,7 @@ const UpdateArtifact = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <p className="text-lg font-semibold">Loading...</p>
+        <span class="loading loading-spinner loading-lg"></span>
       </div>
     );
   }

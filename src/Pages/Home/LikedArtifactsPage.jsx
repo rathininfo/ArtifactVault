@@ -7,7 +7,6 @@ const LikedArtifactsPage = () => {
   const { likedArtifacts } = useContext(LikedArtifactsContext); // Access liked artifacts from the context.
 
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   return (
     <div className="p-6">

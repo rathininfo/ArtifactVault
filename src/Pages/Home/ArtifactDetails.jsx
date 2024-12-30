@@ -6,7 +6,6 @@ import { Helmet } from "react-helmet-async";
 
 const ArtifactDetails = () => {
   const artifact = useLoaderData();
-  console.log(artifact);
   const { addLikedArtifact } = useContext(LikedArtifactsContext); // Access the liked artifacts context
 
   const [count, setCount] = useState(artifact.likeCount);
