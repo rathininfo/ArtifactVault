@@ -157,6 +157,7 @@ const Navbar = () => {
                 <p className="font-semibold bg-green-500 px-2">
                   {user.displayName || "User"}
                 </p>
+              {/* use link */}
                 <Link
                   to="/my-artifacts"
                   className="block hover:underline transition duration-300"
