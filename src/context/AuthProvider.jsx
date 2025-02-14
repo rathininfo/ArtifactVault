@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
         photoURL: photoURL,
       });
 
-      console.log("User created and profile updated:", newUser);
       return newUser;
     } catch (error) {
       console.error("Error creating user or updating profile:", error.message);
@@ -56,12 +55,17 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
 
       if (currentUser?.email) {
         const user = { email: currentUser.email };
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post(
+            "https://historical-artifacts-server-side.vercel.app/jwt",
+            user,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log("Login Token", res.data);
             setLoading(false);
@@ -69,7 +73,7 @@ const AuthProvider = ({ children }) => {
       } else {
         axios
           .post(
-            "http://localhost:5000/logout",
+            "https://historical-artifacts-server-side.vercel.app/logout",
             {},
             {
               withCredentials: true,

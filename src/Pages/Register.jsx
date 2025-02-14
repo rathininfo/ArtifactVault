@@ -14,7 +14,6 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, photoURL, email, password);
 
     // Password Validation
     const passwordError = validatePassword(password);
@@ -28,7 +27,7 @@ const Register = () => {
     createUser(email, password, name, photoURL)
       .then((result) => {
         console.log("User registered successfully:", result);
-        navigate("/login"); // Redirect after successful registration
+        navigate("/"); // Redirect after successful registration
       })
       .catch((error) => {
         console.log("Error registering user:", error.message);

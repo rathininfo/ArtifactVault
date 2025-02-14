@@ -42,11 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/all-artifacts",
         element: <AllArtifacts></AllArtifacts>,
-        loader: () => fetch(`http://localhost:5000/artifacts_collection`),
+        loader: () =>
+          fetch(
+            `https://historical-artifacts-server-side.vercel.app/artifacts_collection`
+          ),
       },
 
       {
-        path: "add-artifact",
+        path: "/add-artifact",
         element: (
           <PrivateRouter>
             <AddArtifact></AddArtifact>
@@ -62,18 +65,22 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/artifacts_collection/${params.id}`),
+          fetch(
+            `https://historical-artifacts-server-side.vercel.app/artifacts_collection/${params.id}`
+          ),
       },
 
       {
         path: "/update-artifact/:id",
         element: (
           <PrivateRouter>
-            <UpdateArtifact></UpdateArtifact>
+            <UpdateArtifact />
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/user-addded-artifacts/${params.id}`),
+          fetch(
+            `https://historical-artifacts-server-side.vercel.app/user-added-artifacts/${params.id}`
+          ),
       },
 
       {

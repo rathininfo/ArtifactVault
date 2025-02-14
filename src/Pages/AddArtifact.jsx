@@ -43,7 +43,7 @@ const AddArtifact = () => {
     try {
       // Send data to the database (adjust the endpoint URL as needed)
       const response = await axios.post(
-        "http://localhost:5000/artifacts-info",
+        "https://historical-artifacts-server-side.vercel.app/artifacts-info",
         artifactData
       );
 

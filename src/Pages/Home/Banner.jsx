@@ -32,7 +32,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className=" bg-gray-100">
+    <div className=" w-full bg-gray-100">
       <Swiper
         modules={[Pagination, Navigation, Autoplay]} // Pass modules here
         pagination={{ clickable: true }}

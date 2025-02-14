@@ -17,7 +17,7 @@ const UpdateArtifact = () => {
     const fetchArtifact = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/user-addded-artifacts/${id}`
+          `https://historical-artifacts-server-side.vercel.app/user-addded-artifacts/${id}`
         );
         if (res.ok) {
           const data = await res.json();
@@ -52,7 +52,7 @@ const UpdateArtifact = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/user-added-artifacts/${id}`,
+        `https://historical-artifacts-server-side.vercel.app/user-added-artifacts/${id}`,
         {
           method: "PUT",
           headers: {

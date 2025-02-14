@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { Helmet } from "react-helmet-async";
 
 const MyArtifacts = () => {
@@ -15,17 +14,12 @@ const MyArtifacts = () => {
     if (user && user.email) {
       setLoading(true); // Set loading to true before starting fetch
       fetch(
-        `http://localhost:5000/added_artifacts_collection?email=${user.email}`,
+        `https://historical-artifacts-server-side.vercel.app/added_artifacts_collection?email=${user.email}`,
         {
           credentials: "include",
         }
       )
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`Failed to fetch artifacts: ${res.status}`);
-          }
-          return res.json();
-        })
+        .then((res) => res.json())
         .then((data) => {
           setArtifacts(Array.isArray(data) ? data : []); // Ensure artifacts is always an array
           setLoading(false); // Data fetched, set loading to false
@@ -45,7 +39,7 @@ const MyArtifacts = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user-added-artifacts/${id}`,
+        `https://historical-artifacts-server-side.vercel.app/user-added-artifacts/${id}`,
         {
           method: "DELETE",
         }

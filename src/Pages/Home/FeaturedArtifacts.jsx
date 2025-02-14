@@ -9,7 +9,7 @@ const FeaturedArtifacts = () => {
     const fetchArtifacts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/artifacts_collection"
+          "https://historical-artifacts-server-side.vercel.app/artifacts_collection"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data from the server");

@@ -13,7 +13,7 @@ const ArtifactDetails = () => {
   const handleLike = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/artifacts_collection/${artifact._id}/like`,
+        `https://historical-artifacts-server-side.vercel.app/artifacts_collection/${artifact._id}/like`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
