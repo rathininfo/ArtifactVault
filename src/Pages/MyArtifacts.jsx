@@ -35,7 +35,7 @@ const MyArtifacts = () => {
     }
   }, [user.email]);
 
-  // Handle Delete Artifact
+  // Handle Delete Artifact here
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
