@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const MyArtifacts = () => {
-  const [artifacts, setArtifacts] = useState([]); // To store artifacts
-  const { user } = useContext(AuthContext); // Access user data from context
-  const [loading, setLoading] = useState(true); // For loading state
+  const [artifacts, setArtifacts] = useState([]); 
+  const { user } = useContext(AuthContext); 
+  const [loading, setLoading] = useState(true);
 
   // Fetch artifacts added by the logged-in user
   useEffect(() => {
