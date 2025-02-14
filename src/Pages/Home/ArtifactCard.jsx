@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const ArtifactCard = ({ artifact }) => {
   return (
-    <div className=" max-w-xs rounded overflow-hidden shadow-lg bg-white p-4">
+    <div className=" max-w-xs rounded-sm overflow-hidden shadow-lg bg-white p-4 ml-8">
       <img
-        className="w-full h-48 object-cover"
+        className="w-full h-48 object-cover rounded-md"
         src={artifact.artifactImage}
         alt={artifact.artifactName}
       />
